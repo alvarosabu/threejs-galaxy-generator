@@ -1,4 +1,4 @@
-# Galaxy Generator
+# Galaxy Generator 🌌 🪐
 
 > Galaxy generator done with [ThreeJS](https://threejs.org/) following the amazing course on [threejs-journey](https://threejs-journey.com/) by [Bruno Simon](https://bruno-simon.com/)
 
