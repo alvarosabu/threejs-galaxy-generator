@@ -1,0 +1,29 @@
+{
+  "name": "threejs-galaxy-generator",
+  "version": "1.0.0",
+  "description": "Galaxy generator done with ThreeJS",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@alvarosabu/eslint-base": "^1.1.0",
+    "@alvarosabu/ui": "^1.0.1",
+    "dat.gui": "^0.7.7",
+    "eslint": "^8.6.0",
+    "eslint-config-google": "^0.14.0",
+    "gsap": "^3.9.1",
+    "three": "^0.136.0",
+    "vercel": "^23.1.2",
+    "vite": "^2.7.10",
+    "vite-plugin-windicss": "^1.6.2"
+  },
+  "dependencies": {
+    "@alvarosabu/prettier-config": "^1.1.0",
+    "lil-gui": "^0.16.0",
+    "windicss": "^3.4.2"
+  }
+}

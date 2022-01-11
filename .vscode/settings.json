@@ -1,0 +1,21 @@
+{
+    "workbench.colorCustomizations": {
+      "activityBar.background": "#fff",
+      "activityBar.foreground": "#7865F2"
+    },
+    "eslint.codeAction.showDocumentation": {
+      "enable": true
+    },
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[vue]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "scss.lint.unknownAtRules": "ignore"
+  }
