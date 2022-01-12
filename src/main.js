@@ -1,8 +1,10 @@
 import './style.css'
 import * as THREE from 'three'
+
 import 'virtual:windi.css'
-import { controls, renderer, scene, gui, stats } from './renderer'
+import { controls, renderer, scene } from './renderer'
 import camera from './camera'
+import { usePane } from './debug'
 
 /**
  * Galaxy
@@ -90,29 +92,17 @@ const generateGalaxy = () => {
   scene.add(particles)
 }
 
-// GUI related
-
-gui.add(parameters, 'count', 0, 100000).onFinishChange(generateGalaxy)
-gui.add(parameters, 'size', 0, 0.1, 0.01).onFinishChange(generateGalaxy)
-gui.add(parameters, 'radius', 0.01, 20, 0.1).onFinishChange(generateGalaxy)
-gui.add(parameters, 'branches', 2, 20, 1).onFinishChange(generateGalaxy)
-gui.add(parameters, 'spin', -5, 5, 0.001).onFinishChange(generateGalaxy)
-gui.add(parameters, 'randomness', 0.1, 2, 0.001).onFinishChange(generateGalaxy)
-gui
-  .add(parameters, 'randomnessPower', 1, 10, 0.001)
-  .onFinishChange(generateGalaxy)
-gui.addColor(parameters, 'insideColor').onFinishChange(generateGalaxy)
-gui.addColor(parameters, 'outsideColor').onFinishChange(generateGalaxy)
+const { fpsGraph } = usePane(parameters, generateGalaxy)
 
 generateGalaxy()
 
 const loop = () => {
-  stats.begin()
+  fpsGraph.begin()
 
   controls.update()
   renderer.render(scene, camera)
 
-  stats.end()
+  fpsGraph.end()
   requestAnimationFrame(loop)
 }
 

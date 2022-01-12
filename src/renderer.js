@@ -1,11 +1,6 @@
 import { WebGLRenderer, Scene, AxesHelper } from 'three'
 import { camera } from './camera'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import GUI from 'lil-gui'
-import Stats from 'three/examples/jsm/libs/stats.module.js'
-
-// Debug
-export const gui = new GUI()
 
 // Scene
 export const scene = new Scene()
@@ -24,13 +19,6 @@ renderer.shadowMap.enabled = true
 const axesHelper = new AxesHelper()
 scene.add(axesHelper)
 axesHelper.visible = false
-
-// Stats
-export const stats = new Stats()
-stats.domElement.style.position = 'absolute'
-stats.domElement.style.top = '0px'
-
-document.body.appendChild(stats.domElement)
 
 const sizes = {
   width: window.innerWidth,
@@ -80,5 +68,4 @@ controls.enableDamping = true
 export default {
   renderer,
   controls,
-  stats,
 }
