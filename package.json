@@ -1,6 +1,6 @@
 {
   "name": "threejs-galaxy-generator",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Galaxy generator done with ThreeJS",
   "main": "src/main.js",
   "license": "MIT",

@@ -7,6 +7,9 @@ export default defineConfig({
   presets: [AsTheme],
   theme: {
     extend: {
+      fontFamily: {
+        title: ['Sacramento', 'serif'],
+      },
       typography: theme => ({
         DEFAULT: {
           css: {

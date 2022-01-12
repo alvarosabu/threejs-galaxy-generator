@@ -1,10 +1,20 @@
 import './style.css'
 import * as THREE from 'three'
-
+import gsap from 'gsap'
 import 'virtual:windi.css'
 import { controls, renderer, scene } from './renderer'
 import camera from './camera'
 import { usePane } from './debug'
+
+// UI
+gsap.to('.title', {
+  delay: 0.5,
+  opacity: 1,
+  y: 2,
+  display: 'block',
+  duration: 0.5,
+  ease: 'expo.out',
+})
 
 /**
  * Galaxy
