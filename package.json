@@ -5,7 +5,7 @@
   "main": "src/main.js",
   "license": "MIT",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --open --host",
     "build": "vite build",
     "preview": "vite preview",
     "deploy": "vercel --prod"
@@ -14,12 +14,15 @@
     "@alvarosabu/eslint-base": "^1.1.0",
     "@alvarosabu/ui": "^1.0.1",
     "@tweakpane/plugin-essentials": "^0.1.4",
+    "@vitejs/plugin-vue": "^2.0.1",
+    "@vueuse/core": "^7.5.3",
     "dat.gui": "^0.7.7",
     "eslint": "^8.6.0",
     "eslint-config-google": "^0.14.0",
     "gsap": "^3.9.1",
     "three": "^0.136.0",
     "tweakpane": "^3.0.7",
+    "unplugin-vue-components": "^0.17.11",
     "uuid": "^8.3.2",
     "vercel": "^23.1.2",
     "vite": "^2.7.10",
@@ -27,6 +30,7 @@
   },
   "dependencies": {
     "@alvarosabu/prettier-config": "^1.1.0",
+    "vue": "^3.2.26",
     "windicss": "^3.4.2"
   }
 }
