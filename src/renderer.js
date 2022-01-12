@@ -5,11 +5,12 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 // Scene
 export const scene = new Scene()
 
-const canvas = document.querySelector('#webgl')
+export const canvas = document.querySelector('#webgl')
 
 // Renderer
 export const renderer = new WebGLRenderer({
   canvas,
+  preserveDrawingBuffer: true, // To allow screenshot
 })
 
 //Shadows
@@ -68,4 +69,5 @@ controls.enableDamping = true
 export default {
   renderer,
   controls,
+  canvas,
 }

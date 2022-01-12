@@ -2,9 +2,10 @@ import './style.css'
 import * as THREE from 'three'
 import gsap from 'gsap'
 import 'virtual:windi.css'
-import { controls, renderer, scene } from './renderer'
+import { controls, renderer, scene, canvas } from './renderer'
 import camera from './camera'
 import { usePane } from './debug'
+import { v4 as uuidv4 } from 'uuid'
 
 // UI
 gsap.to('.title', {
@@ -102,7 +103,16 @@ const generateGalaxy = () => {
   scene.add(particles)
 }
 
-const { fpsGraph } = usePane(parameters, generateGalaxy)
+function saveCanvas() {
+  const anchor = document.createElement('a')
+  anchor.download = `my-awesome-galaxy-${uuidv4()}.png`
+  anchor.href = renderer.domElement.toDataURL()
+  anchor.click()
+}
+
+const { fpsGraph, captureBtn } = usePane(parameters, generateGalaxy)
+
+captureBtn.on('click', saveCanvas)
 
 generateGalaxy()
 

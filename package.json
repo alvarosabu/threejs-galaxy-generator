@@ -20,6 +20,7 @@
     "gsap": "^3.9.1",
     "three": "^0.136.0",
     "tweakpane": "^3.0.7",
+    "uuid": "^8.3.2",
     "vercel": "^23.1.2",
     "vite": "^2.7.10",
     "vite-plugin-windicss": "^1.6.2"

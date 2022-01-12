@@ -6,6 +6,12 @@ export const usePane = (parameters, cb) => {
   const pane = new Pane()
   pane.registerPlugin(EssentialsPlugin)
 
+  // FPS graph
+  const fpsGraph = pane.addBlade({
+    view: 'fpsgraph',
+    label: 'fpsgraph',
+  })
+
   pane
     .addInput(parameters, 'count', {
       min: 0,
@@ -53,11 +59,7 @@ export const usePane = (parameters, cb) => {
   pane.addInput(parameters, 'insideColor').on('change', cb)
   pane.addInput(parameters, 'outsideColor').on('change', cb)
 
-  // FPS graph
-  const fpsGraph = pane.addBlade({
-    view: 'fpsgraph',
-    label: 'fpsgraph',
-  })
+  const captureBtn = pane.addButton({ title: 'Capture' })
 
-  return { pane, fpsGraph }
+  return { captureBtn, pane, fpsGraph }
 }
