@@ -1,11 +1,8 @@
 <script setup>
 import { ref, onMounted, watch, computed } from 'vue'
 import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { Pane } from 'tweakpane'
-import * as EssentialsPlugin from '@tweakpane/plugin-essentials'
 
-import { useWindowSize } from '@vueuse/core'
+import { useCamera, useScene, useRenderer, useTweakPane } from '/@/composables/'
 
 const parameters = {
   count: 30000,
@@ -20,32 +17,20 @@ const parameters = {
 }
 
 // Feature: Renderer
-const experience = ref(null)
-const scene = new THREE.Scene()
+const { scene } = useScene()
 
-const renderer = ref(null)
-let controls = null
-const { width, height } = useWindowSize()
-
-const aspectRatio = computed(() => width.value / height.value)
-
-function updateRenderer() {
-  renderer.value.setSize(width.value, height.value)
-  renderer.value.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-
-  camera.aspect = aspectRatio.value
-  camera.updateProjectionMatrix()
-}
-
-watch(aspectRatio, updateRenderer)
+const {
+  experience,
+  updateRenderer,
+  renderScene,
+  initRenderer,
+  aspectRatio,
+  initOrbitControls,
+  updateControls,
+} = useRenderer()
 
 // Feature: Camera
-const VERTICAL_FIELD_OF_VIEW = 75 // degrees 45 is the normal
-
-const camera = new THREE.PerspectiveCamera(
-  VERTICAL_FIELD_OF_VIEW,
-  aspectRatio.value,
-)
+const { camera } = useCamera({ aspectRatio: aspectRatio.value })
 
 camera.position.set(3, 3, 5)
 
@@ -54,8 +39,8 @@ scene.add(camera)
 const loop = () => {
   fpsGraph.begin()
 
-  controls.update()
-  renderer.value.render(scene, camera)
+  updateControls(camera)
+  renderScene(scene, camera)
 
   fpsGraph.end()
   requestAnimationFrame(loop)
@@ -134,14 +119,7 @@ const generateGalaxy = () => {
 }
 
 // GUI related
-const pane = new Pane()
-pane.registerPlugin(EssentialsPlugin)
-
-// FPS graph
-const fpsGraph = pane.addBlade({
-  view: 'fpsgraph',
-  label: 'fpsgraph',
-})
+const { pane, fpsGraph } = useTweakPane()
 
 pane
   .addInput(parameters, 'count', {
@@ -190,22 +168,13 @@ pane
 pane.addInput(parameters, 'insideColor').on('change', generateGalaxy)
 pane.addInput(parameters, 'outsideColor').on('change', generateGalaxy)
 
-const captureBtn = pane.addButton({ title: 'Capture' })
-
 // Axes Helper
 const axesHelper = new THREE.AxesHelper()
 scene.add(axesHelper)
 
 onMounted(() => {
-  renderer.value = new THREE.WebGLRenderer({
-    canvas: experience.value,
-    preserveDrawingBuffer: true,
-  })
-
-  // Orbit Controls
-  controls = new OrbitControls(camera, renderer.value.domElement)
-  controls.enableDamping = true
-
+  initRenderer()
+  initOrbitControls(camera)
   updateRenderer()
   loop()
   generateGalaxy()
