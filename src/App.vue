@@ -1,7 +1,6 @@
 <script setup>
-import { ref, onMounted, watch, computed } from 'vue'
+import { onMounted } from 'vue'
 import * as THREE from 'three'
-
 import { useCamera, useScene, useRenderer, useTweakPane } from '/@/composables/'
 
 const parameters = {
@@ -170,6 +169,7 @@ pane.addInput(parameters, 'outsideColor').on('change', generateGalaxy)
 
 // Axes Helper
 const axesHelper = new THREE.AxesHelper()
+axesHelper.visible = false
 scene.add(axesHelper)
 
 onMounted(() => {
@@ -183,5 +183,6 @@ onMounted(() => {
 <template>
   <TheHeader />
   <canvas ref="experience"></canvas>
+  <TheOptions />
   <TheFooter />
 </template>

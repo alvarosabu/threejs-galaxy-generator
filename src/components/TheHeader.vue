@@ -16,7 +16,7 @@ onMounted(() => {
 
 <template>
   <h1
-    class="title font-title text-6xl text-white fixed top-8 transform w-full text-center display-none opacity-0 z-10"
+    class="title font-title text-6xl text-white fixed top-8 transform w-full text-center display-none opacity-0 z-10 pointer-events-none"
   >
     Galaxy generator 🪐
   </h1>

@@ -4,10 +4,10 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 import { useWindowSize } from '@vueuse/core'
 
+let renderer = ref(null)
 export const useRenderer = () => {
   const { width, height } = useWindowSize()
   const aspectRatio = computed(() => width.value / height.value)
-  const renderer = ref(null)
   const experience = ref(null)
   const controls = ref(null)
 
@@ -19,10 +19,12 @@ export const useRenderer = () => {
   watch(aspectRatio, updateRenderer)
 
   function initRenderer() {
-    renderer.value = new WebGLRenderer({
-      canvas: experience.value,
-      preserveDrawingBuffer: true,
-    })
+    if (renderer.value === null) {
+      renderer.value = new WebGLRenderer({
+        canvas: experience.value,
+        preserveDrawingBuffer: true,
+      })
+    }
   }
 
   function renderScene(scene, camera) {
@@ -44,6 +46,7 @@ export const useRenderer = () => {
     aspectRatio,
     updateRenderer,
     initRenderer,
+    renderer,
     renderScene,
     controls,
     initOrbitControls,
