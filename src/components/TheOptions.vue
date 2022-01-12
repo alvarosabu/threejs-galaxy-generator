@@ -31,13 +31,7 @@ onMounted(() => {
 
 <template>
   <aside :style="styles" class="absolute right-2 flex justify-end">
-    <AsButton
-      outline
-      label="Capture"
-      variant="secondary"
-      class="mr-4"
-      @click="saveCanvas"
-    />
-    <AsButton outline icon="twitter" variant="secondary" label="Share" />
+    <AsButton outline label="Capture" variant="secondary" @click="saveCanvas" />
+    <!--  <AsButton outline icon="twitter" variant="secondary" label="Share" /> -->
   </aside>
 </template>
