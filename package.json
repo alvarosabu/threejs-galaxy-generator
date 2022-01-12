@@ -26,7 +26,6 @@
   },
   "dependencies": {
     "@alvarosabu/prettier-config": "^1.1.0",
-    "lil-gui": "^0.16.0",
     "windicss": "^3.4.2"
   }
 }
