@@ -1,7 +1,7 @@
 {
   "name": "threejs-galaxy-generator",
   "version": "1.1.0",
-  "description": "Galaxy generator done with ThreeJS",
+  "description": "Galaxy Generator is a tool to generate an awesome random galaxy using ThreeJS and WebGL + ViteJS.",
   "main": "src/main.js",
   "license": "MIT",
   "scripts": {
@@ -32,6 +32,7 @@
     "-": "^0.0.1",
     "@alvarosabu/prettier-config": "^1.1.0",
     "vue": "^3.2.26",
+    "vue-meta": "^3.0.0-alpha.2",
     "windicss": "^3.4.2"
   }
 }

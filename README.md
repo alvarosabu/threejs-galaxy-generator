@@ -1,5 +1,4 @@
-<img width="1791" alt="Screenshot 2022-01-11 at 20 22 12" src="https://user-images.githubusercontent.com/4699008/149007701-648eeb29-1067-478e-8666-8c13592a06ec.png">
-
+![Galaxy Generator](https://res.cloudinary.com/alvarosaburido/image/upload/v1642055935/galaxy-generator_erfcjy.png)
 
 # Galaxy Generator 🌌 🪐
 
