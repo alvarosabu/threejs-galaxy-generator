@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"-@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/-/-/--0.0.1.tgz#db6db7cd866142880dd03e5b8781d1b4fac0e5bd"
+  integrity sha512-3HfneK3DGAm05fpyj20sT3apkNcvPpCuccOThOPdzz8sY7GgQGe0l93XH9bt+YzibcTIgUAIMoyVJI740RtgyQ==
+
 "@alvarosabu/eslint-base@^1.1.0":
   version "1.1.0"
   resolved "https://registry.npmjs.org/@alvarosabu/eslint-base/-/eslint-base-1.1.0.tgz"
@@ -12,10 +17,10 @@
   resolved "https://registry.npmjs.org/@alvarosabu/prettier-config/-/prettier-config-1.1.0.tgz"
   integrity sha512-o6CifCwIae4rXE8FxYYrD+H3QRKmVJyKmSOKd+5MNPWA7mgjVcwUjO7MGXOAEG4TBFw5mK2MC1gLrp5oXEioig==
 
-"@alvarosabu/ui@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@alvarosabu/ui/-/ui-1.0.1.tgz#4eff0d9b1247c65b6a0829ce93f73d80631c8ed6"
-  integrity sha512-KOz70ZdJA6HLiN0bah+n96XjCZ3Gdy/NxYA/z5HWPd4hiHAkBda2W2TiiSxG42fddiq2OpAgg3WnRJXR5GcXww==
+"@alvarosabu/ui@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@alvarosabu/ui/-/ui-1.1.1.tgz#95b02928f9118c283bede26bd05755f1ba36117a"
+  integrity sha512-iONt34JdBRpVEO27G9UaysL5CwK/uJ/PfuAvjJRNGW82ucdScY7zHKqXS1V2L0dUOMgJ5WcbZEreM+294NZGvQ==
   dependencies:
     "@iconify/iconify" "^2.0.4"
     "@windicss/plugin-animations" "^1.0.9"
