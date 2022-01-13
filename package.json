@@ -32,7 +32,6 @@
     "-": "^0.0.1",
     "@alvarosabu/prettier-config": "^1.1.0",
     "vue": "^3.2.26",
-    "vue-meta": "^3.0.0-alpha.2",
     "windicss": "^3.4.2"
   }
 }

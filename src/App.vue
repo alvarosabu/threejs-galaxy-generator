@@ -2,7 +2,6 @@
 import { onMounted } from 'vue'
 import * as THREE from 'three'
 import { useCamera, useScene, useRenderer, useTweakPane } from '/@/composables/'
-import { useMeta } from 'vue-meta'
 
 const parameters = {
   count: 30000,
