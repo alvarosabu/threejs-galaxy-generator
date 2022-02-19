@@ -1,4 +1,4 @@
-import { ref, watch, computed, toRaw } from 'vue'
+import { ref, watch, computed, toRaw, render } from 'vue'
 import { WebGLRenderer } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
@@ -41,6 +41,11 @@ export const useRenderer = () => {
     controls.value.update()
   }
 
+  function disposeRenderer() {
+    controls.value.dispose()
+    renderer.value.dispose()
+  }
+
   return {
     experience,
     aspectRatio,
@@ -51,5 +56,6 @@ export const useRenderer = () => {
     controls,
     initOrbitControls,
     updateControls,
+    disposeRenderer,
   }
 }
