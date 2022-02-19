@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, computed, ref } from 'vue'
+import { onMounted, computed, ref, onBeforeUnmount } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 
 import { useRenderer } from '/@/composables/'

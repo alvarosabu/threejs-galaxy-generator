@@ -26,6 +26,7 @@
     "uuid": "^8.3.2",
     "vercel": "^23.1.2",
     "vite": "^2.7.10",
+    "vite-plugin-glsl": "^0.0.9",
     "vite-plugin-windicss": "^1.6.2"
   },
   "dependencies": {

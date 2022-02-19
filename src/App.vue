@@ -1,11 +1,13 @@
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, onBeforeUnmount } from 'vue'
 import * as THREE from 'three'
 import { useCamera, useScene, useRenderer, useTweakPane } from '/@/composables/'
+import galaxyVertexShader from './shaders/galaxy/vertex.glsl'
+import galaxyFragmentShader from './shaders/galaxy/fragment.glsl'
 
 const parameters = {
   count: 30000,
-  size: 0.01,
+  size: 10,
   radius: 5,
   branches: 3,
   spin: 1,
@@ -19,6 +21,7 @@ const parameters = {
 const { scene } = useScene()
 
 const {
+  renderer,
   experience,
   updateRenderer,
   renderScene,
@@ -26,6 +29,7 @@ const {
   aspectRatio,
   initOrbitControls,
   updateControls,
+  disposeRenderer,
 } = useRenderer()
 
 // Feature: Camera
@@ -34,16 +38,6 @@ const { camera } = useCamera({ aspectRatio: aspectRatio.value })
 camera.position.set(3, 3, 5)
 
 scene.add(camera)
-
-const loop = () => {
-  fpsGraph.begin()
-
-  updateControls(camera)
-  renderScene(scene, camera)
-
-  fpsGraph.end()
-  requestAnimationFrame(loop)
-}
 
 // Feature: Galaxy
 
@@ -68,14 +62,21 @@ const generateGalaxy = () => {
 
   const positions = new Float32Array(parameters.count * 3)
   const colors = new Float32Array(parameters.count * 3)
+  const scales = new Float32Array(parameters.count)
+  const randomness = new Float32Array(parameters.count * 3)
 
   for (let i = 0; i < parameters.count; i++) {
     const i3 = i * 3
 
     const radius = Math.random() * parameters.radius
-    const spinAngle = radius * parameters.spin
+    /*  const spinAngle = radius * parameters.spin */
+    const spinAngle = 0
     const branchAngle =
       ((i % parameters.branches) * Math.PI * 2) / parameters.branches
+
+    positions[i3] = Math.cos(branchAngle) * radius // x
+    positions[i3 + 1] = 0 // y
+    positions[i3 + 2] = Math.sin(branchAngle) * radius // z
 
     const randomX =
       Math.pow(Math.random(), parameters.randomnessPower) *
@@ -87,9 +88,9 @@ const generateGalaxy = () => {
       Math.pow(Math.random(), parameters.randomnessPower) *
       (Math.random() < 0.5 ? -1 : 1)
 
-    positions[i3] = Math.cos(branchAngle + spinAngle) * radius + randomX // x
-    positions[i3 + 1] = randomY // y
-    positions[i3 + 2] = Math.sin(branchAngle + spinAngle) * radius + randomZ // z
+    randomness[i3] = randomX
+    randomness[i3 + 1] = randomY
+    randomness[i3 + 2] = randomZ
 
     const mixedColor = colorInside.clone()
     mixedColor.lerp(colorOutside, radius / parameters.radius)
@@ -97,24 +98,55 @@ const generateGalaxy = () => {
     colors[i3 + 0] = mixedColor.r // R
     colors[i3 + 1] = mixedColor.g // G
     colors[i3 + 2] = mixedColor.b // B
+
+    scales[i] = Math.random()
   }
 
   geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
   geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3))
+  geometry.setAttribute('aScale', new THREE.BufferAttribute(scales, 1))
+  geometry.setAttribute('aRandomness', new THREE.BufferAttribute(randomness, 3))
 
-  material = new THREE.PointsMaterial({
+  material = new THREE.ShaderMaterial({
     transparent: true,
-    alphaMap: texture,
-    color: 0xffffff,
-    size: parameters.size,
-    sizeAttenuation: true,
+    /*     alphaMap: texture,
+    color: 0xffffff, */
+    /*     size: parameters.size,
+    sizeAttenuation: true, */
     depthWrite: false,
     blending: THREE.AdditiveBlending,
     vertexColors: true,
+    vertexShader: galaxyVertexShader,
+    fragmentShader: galaxyFragmentShader,
+    uniforms: {
+      uTime: { value: 0 },
+      uSize: {
+        value: parameters.size * renderer.value.getPixelRatio(),
+      },
+    },
   })
 
   particles = new THREE.Points(geometry, material)
   scene.add(particles)
+}
+
+// Feature: Animate
+const clock = new THREE.Clock()
+
+const loop = () => {
+  fpsGraph.begin()
+
+  const elapsedTime = clock.getElapsedTime()
+
+  if (material) {
+    material.uniforms.uTime.value = elapsedTime
+  }
+
+  updateControls(camera)
+  renderScene(scene, camera)
+
+  fpsGraph.end()
+  requestAnimationFrame(loop)
 }
 
 // GUI related
@@ -129,8 +161,8 @@ pane
 pane
   .addInput(parameters, 'size', {
     min: 0.01,
-    max: 0.1,
-    step: 0.01,
+    max: 40,
+    step: 1,
   })
   .on('change', generateGalaxy)
 pane
@@ -178,6 +210,13 @@ onMounted(() => {
   updateRenderer()
   loop()
   generateGalaxy()
+})
+
+onBeforeUnmount(() => {
+  scene.remove(particles)
+  geometry.dispose()
+  material.dispose()
+  disposeRenderer()
 })
 </script>
 <template>
