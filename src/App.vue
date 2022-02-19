@@ -7,12 +7,12 @@ import galaxyFragmentShader from './shaders/galaxy/fragment.glsl'
 
 const parameters = {
   count: 30000,
-  size: 10,
+  size: 20,
   radius: 5,
   branches: 3,
   spin: 1,
-  randomness: 0.02,
-  randomnessPower: 3,
+  randomness: 0.13,
+  randomnessPower: 7.5,
   insideColor: '#b5f28d',
   outsideColor: '#1b3984',
 }
