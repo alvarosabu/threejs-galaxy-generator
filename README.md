@@ -1,4 +1,4 @@
-![Galaxy Generator](https://res.cloudinary.com/alvarosaburido/image/upload/v1642055935/galaxy-generator_erfcjy.png)
+![Galaxy Generator](https://res.cloudinary.com/alvarosaburido/image/upload/v1642063039/og-image_pu3tow.png)
 
 # Galaxy Generator 🌌 🪐
 
